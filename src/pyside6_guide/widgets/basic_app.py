@@ -28,10 +28,17 @@ class MainWindow(QMainWindow):
         title_label = QLabel("Basic App: a simple greeting app.")
 
         # TODO: add a text input for user's name
+        ask_label = QLabel("What is your name?")
+
+        user_input = QLineEdit()
 
         # TODO: add a push button to greet user
 
+        greet_button = QPushButton("?")
+        greet_button.clicked.connect(self.greet_button_clicked)
+
         # TODO: add a label to greet user
+        greet_label = QLabel("Hello!")
 
         """
         Challenges:
@@ -43,6 +50,10 @@ class MainWindow(QMainWindow):
 
         # add widgets & layouts to main layout
         layout.addWidget(title_label)
+        layout.addWidget(ask_label)
+        layout.addWidget(user_input)
+        layout.addWidget(greet_button)
+        layout.addWidget(greet_label)
 
         # [OPTIONAL] Add a stretch to move everything up
         layout.addStretch()
@@ -52,6 +63,11 @@ class MainWindow(QMainWindow):
 
         # Set the central widget of the Window.
         self.setCentralWidget(widget)
+
+    def greet_button_clicked(self):
+        print("Greet button clicked hi")
+        
+
 
 
 if __name__ == "__main__":
