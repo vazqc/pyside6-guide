@@ -28,17 +28,21 @@ class MainWindow(QMainWindow):
         title_label = QLabel("Basic App: a simple greeting app.")
 
         # TODO: add a text input for user's name
-        ask_label = QLabel("What is your name?")
 
-        user_input = QLineEdit()
+        self.user_input = QLineEdit()
+        self.user_input.setPlaceholderText("What's your name?")
+        self.user_input.textEdited.connect(self.edited)
+        
+        self.username = self.user_input.text
+
 
         # TODO: add a push button to greet user
 
-        greet_button = QPushButton("?")
-        greet_button.clicked.connect(self.greet_button_clicked)
+        self.greet_button = QPushButton("?")
+        self.greet_button.clicked.connect(self.greet_button_clicked)
 
         # TODO: add a label to greet user
-        greet_label = QLabel("Hello!")
+        self.greet_label = QLabel("Hello!")
 
         """
         Challenges:
@@ -50,10 +54,9 @@ class MainWindow(QMainWindow):
 
         # add widgets & layouts to main layout
         layout.addWidget(title_label)
-        layout.addWidget(ask_label)
-        layout.addWidget(user_input)
-        layout.addWidget(greet_button)
-        layout.addWidget(greet_label)
+        layout.addWidget(self.user_input)
+        layout.addWidget(self.greet_button)
+        layout.addWidget(self.greet_label)
 
         # [OPTIONAL] Add a stretch to move everything up
         layout.addStretch()
@@ -65,7 +68,12 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
     def greet_button_clicked(self):
-        print("Greet button clicked hi")
+        self.greet_button.setText("Hello!")
+    
+    
+    def edited(self, text):
+        print(text)
+        return (text)
         
 
 
