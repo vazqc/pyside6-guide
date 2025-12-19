@@ -12,6 +12,8 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QPushButton,
     QVBoxLayout,
+    QHBoxLayout,
+    QGridLayout,
     QWidget,
 )
 
@@ -20,6 +22,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        layout = QGridLayout
+
         self.setWindowTitle("Basic App")
         self.setContentsMargins(12, 12, 12, 12)
         self.resize(320, 240)
@@ -27,11 +31,17 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout()
         title_label = QLabel("Basic App: a simple greeting app.")
 
-        # TODO: add a text input for user's name
+        # TODO: add a label to greet user
+        self.hi_label = QLabel("Hello, ")
+        self.greet_label = QLabel()
+        
 
+
+
+        # TODO: add a text input for user's name
         self.user_input = QLineEdit()
         self.user_input.setPlaceholderText("What's your name?")
-        self.user_input.textEdited.connect(self.edited)
+        self.user_input.textChanged.connect(self.greet_label.setText)
         
         self.username = self.user_input.text
 
@@ -41,8 +51,8 @@ class MainWindow(QMainWindow):
         self.greet_button = QPushButton("?")
         self.greet_button.clicked.connect(self.greet_button_clicked)
 
-        # TODO: add a label to greet user
-        self.greet_label = QLabel("Hello!")
+       
+        
 
         """
         Challenges:
@@ -54,10 +64,11 @@ class MainWindow(QMainWindow):
 
         # add widgets & layouts to main layout
         layout.addWidget(title_label)
-        layout.addWidget(self.user_input)
         layout.addWidget(self.greet_button)
+        layout.addWidget(self.user_input)
+        layout.addWidget(self.hi_label)
         layout.addWidget(self.greet_label)
-
+        
         # [OPTIONAL] Add a stretch to move everything up
         layout.addStretch()
 
@@ -68,7 +79,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
 
     def greet_button_clicked(self):
-        self.greet_button.setText("Hello!")
+        self.greet_button.setText("Greetings!")
     
     
     def edited(self, text):
